@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.videoplayer.R
+import com.example.videoplayer.VideoPlayerApplication
 import com.example.videoplayer.adapters.VideoListAdapter
 import com.example.videoplayer.databinding.ActivityMainBinding
 import com.example.videoplayer.networking.RetrofitInstance
@@ -34,15 +35,11 @@ class MainActivity : AppCompatActivity() {
         player.play()
     } }
 
-//    val VIDEO_URL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val videoApi = RetrofitInstance.getInstance().create(VideoApi::class.java)
-
-        val repository = VideoListRepository(videoApi)
+        val repository = (application as VideoPlayerApplication).videoListRepository
 
         mainViewModel = ViewModelProvider(this, MainViewModelFactory(repository))[MainViewModel::class.java]
 

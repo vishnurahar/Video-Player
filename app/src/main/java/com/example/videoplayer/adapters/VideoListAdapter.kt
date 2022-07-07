@@ -45,15 +45,13 @@ class VideoListAdapter(private val onItemClickListener: (url: String) -> Unit) :
                     .into(binding.videoThumbnailImage)
             }
             binding.titleTv.text = "Video ID: ${videoItem.id}"
-            binding.subTitleTv.text = "User: ${videoItem.user.name}"
+            binding.viewCountTextView.text = "Views : Not yet Played"
 
             binding.root.setOnClickListener {
                 onItemClickListener.invoke(videoItem.video_files[0].link)
-//                val player = ExoPlayer.Builder().build()
-//                binding.root.ExoPlayerView.player = player
-//                val mediaItem = MediaItem.fromUri(VIDEO_URL)
-//                player.addMediaItem(mediaItem)
-//                player.prepare()
+                var viewCount = 0
+                viewCount++
+                binding.viewCountTextView.text = "Views : $viewCount"
             }
         }
     }

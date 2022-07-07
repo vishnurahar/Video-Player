@@ -19,7 +19,6 @@ object RetrofitInstance {
                 val request = chain.request().newBuilder().addHeader("Authorization", API_KEY).build()
                 chain.proceed(request)
             })
-            .addInterceptor(logging)
             .build()
 
         return Retrofit.Builder()
